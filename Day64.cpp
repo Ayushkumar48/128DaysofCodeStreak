@@ -18,7 +18,7 @@ public:
     }
 };
 
-//2206. Divide Array Into Equal Pairs  
+//2206. Divide Array Into Equal Pairs
 class Solution {
 public:
     bool divideArray(vector<int>& nums) {
