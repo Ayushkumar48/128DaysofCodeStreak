@@ -15,6 +15,9 @@
         "span": "cpp",
         "stacktrace": "cpp",
         "regex": "cpp",
-        "valarray": "cpp"
+        "valarray": "cpp",
+        "chrono": "cpp",
+        "forward_list": "cpp",
+        "format": "cpp"
     }
 }
