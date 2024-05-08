@@ -64,6 +64,11 @@ public:
 };
 int main()
 {
-
+    Graph<int> g;
+    g.addEdge(1, 2, 1, 5);
+    g.addEdge(2, 3, 1, 6);
+    g.addEdge(1, 7, 1, 9);
+    g.addEdge(3, 5, 1, 46);
+    // g.printAdjList();
     return 0;
 }
