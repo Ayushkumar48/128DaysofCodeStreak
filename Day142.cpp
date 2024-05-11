@@ -1,46 +1,37 @@
 // Different cycle detection methods, majorly - undirected and directed.
-#include <iostream>
 #include <bits/stdc++.h>
+
+#include <iostream>
 using namespace std;
 
 template <typename T>
-class Graph
-{
-public:
+class Graph {
+   public:
     unordered_map<T, list<T>> adjList;
     unordered_map<T, bool> visited;
-    void addEdge(T a, T b, bool direction)
-    {
+    void addEdge(T a, T b, bool direction) {
         adjList[a].push_back(b);
-        if (!direction)
-        {
+        if (!direction) {
             adjList[b].push_back(a);
         }
     }
     // Undirected Graph
-    bool cycleUndirectedGraphBFS(T src)
-    {
+    bool cycleUndirectedGraphBFS(T src) {
         queue<T> q;
         unordered_map<T, T> parent;
         q.push(src);
         visited[src] = true;
         parent[src] = -1;
-        while (!q.empty())
-        {
+        while (!q.empty()) {
             T frontNode = q.front();
             q.pop();
-            for (auto it : adjList[frontNode])
-            {
-                if (!visited[it])
-                {
+            for (auto it : adjList[frontNode]) {
+                if (!visited[it]) {
                     visited[it] = true;
                     q.push(it);
                     parent[it] = frontNode;
-                }
-                else
-                {
-                    if (it != parent[frontNode])
-                    {
+                } else {
+                    if (it != parent[frontNode]) {
                         return true;
                     }
                 }
@@ -48,21 +39,14 @@ public:
         }
         return false;
     }
-    bool cycleUndirectedGraphDFS(T src, T parent)
-    {
+    bool cycleUndirectedGraphDFS(T src, T parent) {
         visited[src] = true;
-        for (auto it : adjList[src])
-        {
-            if (!visited[it])
-            {
+        for (auto it : adjList[src]) {
+            if (!visited[it]) {
                 bool ans = cycleUndirectedGraphDFS(it, src);
-                if (ans)
-                    return true;
-            }
-            else
-            {
-                if (it != parent)
-                {
+                if (ans) return true;
+            } else {
+                if (it != parent) {
                     return true;
                 }
             }
@@ -70,30 +54,22 @@ public:
         return false;
     }
     // Directed Graph
-    bool cycleDirectedGraphDFS(T src, unordered_map<T, bool> &track)
-    {
+    bool cycleDirectedGraphDFS(T src, unordered_map<T, bool> &track) {
         visited[src] = true;
         track[src] = true;
-        for (auto it : adjList[src])
-        {
-            if (!visited[it])
-            {
+        for (auto it : adjList[src]) {
+            if (!visited[it]) {
                 bool ans = cycleDirectedGraphDFS(it, track);
-                if (ans)
-                    return true;
-            }
-            else
-            {
-                if (track[it])
-                    return true;
+                if (ans) return true;
+            } else {
+                if (track[it]) return true;
             }
         }
         track[src] = false;
         return false;
     }
 };
-int main()
-{
+int main() {
     Graph<char> g;
     g.addEdge('a', 'b', 1);
     g.addEdge('a', 'c', 1);
