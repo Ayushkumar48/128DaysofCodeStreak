@@ -17,53 +17,6 @@ public:
             adjList[b].push_back(a);
         }
     }
-    void BFS(T src)
-    {
-        queue<T> q;
-        q.push(src);
-        while (!q.empty())
-        {
-            T frontNode = q.front();
-            q.pop();
-            if (!visited[frontNode])
-            {
-                cout << frontNode << " ";
-                visited[frontNode] = true;
-                for (auto it : adjList[frontNode])
-                {
-                    if (!visited[it])
-                    {
-                        q.push(it);
-                    }
-                }
-            }
-        }
-    }
-    void DFS(T src)
-    {
-        cout << src << " ";
-        visited[src] = true;
-        for (auto it : adjList[src])
-        {
-            if (!visited[it])
-            {
-                visited[it] = true;
-                DFS(it);
-            }
-        }
-    }
-    void printAdjList()
-    {
-        for (auto it : adjList)
-        {
-            cout << it.first << "-> ";
-            for (auto i : it.second)
-            {
-                cout << i << " ";
-            }
-            cout << "\n";
-        }
-    }
     // Undirected Graph
     bool cycleUndirectedGraphBFS(T src)
     {
@@ -151,9 +104,6 @@ int main()
     g.addEdge('e', 'g', 1);
     g.addEdge('e', 'f', 1);
     g.addEdge('c', 'a', 1);
-    // g.DFS('a');
-    // g/BFS('a');
-    // g.printAdjList();
     cout << g.cycleUndirectedGraphDFS('a', '0') << "\n";
     cout << g.cycleUndirectedGraphBFS('a') << "\n";
     unordered_map<char, bool> track;
